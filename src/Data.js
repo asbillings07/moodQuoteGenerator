@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import { API_TOKEN } from 'react-native-dotenv'
 export class Data {
   api (path, method = 'GET', body = null, requiresAuth = true) {
     const url = `https://api.paperquotes.com/apiv1/${path}`
@@ -10,7 +10,7 @@ export class Data {
       }
     }
     if (requiresAuth) {
-      const token = process.env.REACT_APP_API_TOKEN
+      const token = API_TOKEN
       options.headers.authorization = `Token ${token}`
     }
     if (body !== null) {
@@ -21,7 +21,7 @@ export class Data {
   }
 
   async getRandomQuote () {
-    const res = await this.api('qod')
+    const res = await this.api('quotes/?tags=random')
     if (res.status === 200) {
       return res.data
     } else if (res.status >= 400 && res.status <= 500) {

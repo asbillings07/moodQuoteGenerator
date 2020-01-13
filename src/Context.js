@@ -9,25 +9,25 @@ const Provider = ({ children }) => {
     sadQuotes: [],
     madQuotes: [],
     upbeatQuotes: [],
-    qodQuotes: []
+    randomQuotes: []
   })
 
   const data = new Data()
 
   const getQuoteData = useCallback(async () => {
-    if (state.qodQuotes.length === 0) {
+    if (state.randomQuotes.length === 0) {
       const happyQuoteData = await data.getHappyQuote()
       const sadQuoteData = await data.getSadQuote()
       const madQuoteData = await data.getMadQuote()
       const upbeatQuoteData = await data.getUpbeatQuote()
-      const qodQuoteData = await data.getRandomQuote()
+      const randomQuoteData = await data.getRandomQuote()
 
       setState({
         happyQuotes: happyQuoteData,
         sadQuotes: sadQuoteData,
         madQuotes: madQuoteData,
         upbeatQuotes: upbeatQuoteData,
-        qodQuotes: qodQuoteData
+        randomQuotes: randomQuoteData
       })
     }
   }, [data, state.qodQuotes])
